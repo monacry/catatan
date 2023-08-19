@@ -1,13 +1,12 @@
 ## Switch Theme
 ini potongan projek laravel 10 saya untuk merubah tema gelap dan terang, fix fungsi merubah tema tapi saat halaman dimuat ulang temanya mereset ke tampilan awal lagi.
 
-### html head
 > html bagian link css
 ```html
 <link href="{{ asset('dashboard-assets') }}/css/bootstrap-main.css" id="bootstrap-theme" class="theme-opt" rel="stylesheet" type="text/css" />
 <link href="{{ asset('dashboard-assets') }}/css/style-main.css" id="style-theme" class="theme-opt" rel="stylesheet" type="text/css" />
 ```
-### html navbar
+
 > html bagian button trigger navbar
 ```html
 <a href="javascript:void(0)" class="dark-version t-dark" id="t-dark" onclick="setTheme('gelap')" style="display: block">
@@ -19,7 +18,7 @@ ini potongan projek laravel 10 saya untuk merubah tema gelap dan terang, fix fun
 ```
 
 
-### javascript
+
 > script javascript
 ```javascript
 document.addEventListener("DOMContentLoaded", function() {
