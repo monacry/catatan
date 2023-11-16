@@ -1,0 +1,14 @@
+@php
+    // array buat fungsi menu-open (karena tidak ada pengelompokan halaman)
+    $activeRoutesDataMaster = ['daftar-akun', 'persediaan', 'kode-bantu', 'daftar-nota', 'daftar-invoice', 'divisi', 'project'];
+    $activeRoutesLaporanKeuangan = ['neraca', 'laba-rugi'];
+    $activeRoutesLaporanPendukung = ['buku-besar', 'buku-persediaan', 'buku-pembantu', 'buku-nota', 'buku-invoice', 'neraca-lajur', 'laba-rugi-lajur', 'aktiva-neraca-bulan', 'laba-bulan'];
+    $activeRoutesDivisiProject = ['laba-rugi-divisi', 'laba-rugi-divisibln', 'laba-rugi-project', 'laba-rugi-projectbln'];
+    $currentRoute = Request::segment(1);
+@endphp
+
+
+
+<li class="nav-item {{ in_array($currentRoute, $activeRoutesDataMaster) ? 'menu-open' : '' }}">
+
+<li class="nav-item {{ in_array($currentRoute, $activeRoutesLaporanKeuangan) ? 'menu-open' : '' }}">
