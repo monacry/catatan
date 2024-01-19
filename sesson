@@ -1,0 +1,60 @@
+controller :
+public function index()
+    {
+        if (!session()->has('page')) {
+            session(['page' => 'login']);
+        }
+
+        return view('auth.login-register.index')->with([
+            'title'             => 'Login',
+            'login'             => $this->setActivePage('login'),
+            'register'          => $this->setActivePage('register'),
+        ]);
+    }
+
+    protected function setActivePage($page)
+    {
+        return [
+            'active'    => Session::get('page') === $page ? 'active' : '',
+            'selected'  => Session::get('page') === $page ? 'true' : 'false',
+            'show'      => Session::get('page') === $page ? 'show active' : '',
+        ];
+    }
+
+
+    public function SessionPageSwitch($page)
+    {
+        if ($page == 'login' || $page == 'register') {
+            session(['page' => $page]);
+            return redirect('/');
+        } else {
+            return abort(404);
+        }
+    }
+
+js :
+let lbtn = document.querySelector('.lbtn');
+            let rbtn = document.querySelector('.rbtn');
+            let vsess = "{{ Session::get('page') }}";
+
+            lbtn.addEventListener("click", () => {
+                if (lbtn.classList.contains("active")) {
+                    fetch("/login-register/login");
+                }
+            });
+            rbtn.addEventListener("click", () => {
+                if (rbtn.classList.contains("active")) {
+                    fetch("/login-register/register");
+                }
+            });
+
+html:
+<div class="bg-success rounded-pill p-1 me-2" id="nav-tab" role="tablist">
+    <button class="btn btn-logreg rounded-pill btn-sm lbtn {{ $login['active'] }}" style="letter-spacing: 2px" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="{{ $login['selected'] }}">
+        <i class="fas fa-lock pe-1"></i>Login
+    </button>
+    <button class="btn btn-logreg rounded-pill btn-sm rbtn {{ $register['active'] }}" style="letter-spacing: 2px" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register"
+        aria-selected="{{ $register['selected'] }}">
+        <i class="fas fa-user-plus pe-1"></i>Register
+    </button>
+</div>
