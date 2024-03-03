@@ -1,0 +1,20 @@
+async function getData() {
+            const res = await fetch("{{ route('pegawai.index') }}");
+            const data = await res.json();
+            return data;
+        }
+
+        async function tampil() {
+            const data = await getData();
+
+            const tbody = document.getElementById('table-body');
+            data.data.forEach(i => {
+                tables.row.add([
+                    '',
+                    i.name,
+                    '',
+                ]).draw(false);
+            })
+        }
+
+        tampil();
