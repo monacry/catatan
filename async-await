@@ -18,3 +18,20 @@ async function getData() {
         }
 
         tampil();
+
+
+// loadAllData()
+
+        // SHOW TABLE=====================================================================
+        // function loadAllData() {
+        //     $.ajax({
+        //         url: "{{ route('kategori.show') }}",
+        //         type: 'GET',
+        //         success: function(response) {
+        //             $('#showKategori').html(response);
+        //         },
+        //         error: function(xhr, status) {
+        //             console.error(xhr.responseText);
+        //         }
+        //     });
+        // }
