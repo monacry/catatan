@@ -1,0 +1,32 @@
+
+
+
+let Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 5000,
+            width: "32em",
+            padding: ".2rem .7rem",
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+Toastify({
+                        text: "This is a toast",
+                        className: "mirazensa",
+                        gravity: "bottom",
+                        position: "right",
+                        stopOnFocus: true,
+                        duration: 5000,
+                    }).showToast();
+                    Toast.fire({
+                        icon: "error",
+                        iconHtml: "<i class='ti ti-lock-x'></i>",
+                        title: "LOGIN GAGAL!",
+                        text: message,
+                        showCloseButton: true,
+                    });
