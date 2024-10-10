@@ -1,0 +1,39 @@
+$.ajax({
+    url: "{{ route('masters.accountGroup.show', ':id') }}".replace(':id', id),
+    type: 'GET',
+    success: function(response) {
+        Swal.fire({
+            title: "Apakah anda yakin?",
+            text: `target "${response.data.code} | ${response.data.name}", data yang akan dihapus tidak dapat dikembalikan!`,
+            icon: "warning",
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Hapus Sekarang!",
+            preConfirm: function() {
+                return $.ajax({
+                    url: "{{ route('masters.accountGroup.destroy', ':id') }} ".replace(':id', id),
+                    type: 'POST',
+                    data: {
+                        _method: $('#accountGroup_delete_form input[name="_method"]').val(),
+                        _token: $('#accountGroup_delete_form input[name="_token"]').val(),
+                    },
+                    success: function(response) {
+                        table.ajax.reload(null, false);
+                        alertSuccess('Success', response.message);
+                    },
+                    error: function(error) {
+                        let errors = error.responseJSON;
+                        Swal.hideLoading();
+                        alertError('Error', errors.message);
+                    }
+                });
+            }
+        });
+    },
+    error: function(error) {
+        let errors = error.responseJSON.errors
+        var message = error.responseJSON.message
+    },
+})
