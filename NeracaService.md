@@ -1,4 +1,11 @@
 ```php
+$user   = Auth::user();
+        $query  = Account::with(['journalTransactionDebit', 'journalTransactionCredit', 'accountGroup'])->where('type', $type)->select('id', 'code', 'name', 'account_group_id', 'opening_debit_balance', 'opening_credit_balance')->whereYearOwnership($user->parent_id, $year)->get();
+        return $query->map(function ($item) {
+            $movementDebitBalance   = $item->journalTransactionDebit->sum('balance');
+            $movementCreditBalance  = $item->journalTransactionCredit->sum('balance');
+            $currentBalance         = $movementDebitBalance - $movementCreditBalance;
+            $openingBalance         = $item->opening_debit_balance - $item->opening_credit_balance;
         return $query->map(function ($item) {
             $movementDebitBalance   = $item->journalTransactionDebit->sum('balance');
             $movementCreditBalance  = $item->journalTransactionCredit->sum('balance');
