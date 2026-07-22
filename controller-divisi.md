@@ -1,4 +1,4 @@
-```
+```php
 $invoice    = Divisi::where('tahun', $tahun)
             ->where('user_id', $user->id)
             // Pendapatan Debit
